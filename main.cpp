@@ -1,18 +1,21 @@
-#include<stdio.h>
 #include <iostream>
 
+// テンプレートクラス
 template <typename T1, typename T2>
 class Numbers {
 public:
 	T1 num1;
 	T2 num2;
 
+	// コンストラクタ：2つの値で初期化
 	Numbers(T1 num1, T2 num2) :num1(num1), num2(num2) {}
 
+	// より小さい値を返す関数
 	auto PickSmaller() {
 		return (num1 > num2) ? num2 : num1;
 	}
 
+	// 数値とそのうち小さい方を出力する関数
 	void Print() {
 		std::cout << "[ " << num1 << ", " << num2 << " ]\n";
 		std::cout << "Smaller number: " << PickSmaller() << "\n\n";
@@ -21,27 +24,27 @@ public:
 
 
 int main() {
-	//intとint
+	//int と int
 	Numbers<int, int> intNint(10, 20);
 	intNint.Print();
 
-	//intとfloat
+	//int と float
 	Numbers<int, float> intNfloat(5, 1.5f);
 	intNfloat.Print();
 
-	//intとdouble
+	//int と double
 	Numbers<int, double> intNdouble(10, 5.55);
 	intNdouble.Print();
 
-	//floatとfloat
+	//float と float
 	Numbers<float, float> floatNfloat(2.3f, 1.5f);
 	floatNfloat.Print();
 
-	//floatとdouble
+	//float と double
 	Numbers<float, double> floatNdouble(2.3f, 1.44);
 	floatNdouble.Print();
 
-	//doubleとdouble
+	//double と double
 	Numbers<double, double> doubleNdouble(1.23, 1.44);
 	doubleNdouble.Print();
 
