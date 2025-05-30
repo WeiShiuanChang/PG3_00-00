@@ -3,21 +3,28 @@
 // 基底クラス
 class Vehicle {
 public:
+    Vehicle() {};
+    virtual ~Vehicle() {};
+
     // 仮想関数 
     virtual void move() {
         std::cout << "移動手段" << std::endl;
     }
 };
-
+// 派生クラス 1
 class Car : public Vehicle {
 public:
+    Car() {};
+    ~Car() {};
     void move() override {
         std::cout << "車で出発" << std::endl;
     }
 };
-
+// 派生クラス 2
 class Bicycle : public Vehicle {
 public:
+    Bicycle() {};
+    ~Bicycle() {};
     void move() override {
         std::cout << "自転車で出発" << std::endl;
     }
