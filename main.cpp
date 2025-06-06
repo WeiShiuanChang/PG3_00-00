@@ -1,56 +1,69 @@
 #include <iostream>
 
 // 基底クラス
-class Vehicle {
+class IShape {
 public:
-    Vehicle() {};
-    virtual ~Vehicle() {};
+    IShape() {};
+    virtual ~IShape() {};
+    float size = 0;
 
     // 仮想関数 
-    virtual void move() {
-        std::cout << "移動手段" << std::endl;
-    }
+    virtual void Size() = 0;
+    virtual void Draw() = 0;
 };
 // 派生クラス 1
-class Car : public Vehicle {
+class Circle : public IShape {
 public:
-    Car() {};
-    ~Car() {};
-    void move() override {
-        std::cout << "車で出発" << std::endl;
+    Circle() {};
+    ~Circle() {};
+
+    void Size() override {
+        int radius = 5;
+        size = radius * radius * 3.14;
+    }
+
+    void Draw() override {
+        std::cout << "円の面積は" <<size << std::endl;
     }
 };
 // 派生クラス 2
-class Bicycle : public Vehicle {
+class Rectangle : public IShape {
 public:
-    Bicycle() {};
-    ~Bicycle() {};
-    void move() override {
-        std::cout << "自転車で出発" << std::endl;
+    Rectangle() {};
+    ~Rectangle() {};
+
+    void Size() override {
+        int width = 10;
+        int height = 5;
+        size = width * height;
+    }
+    void Draw() override {
+        std::cout << "長方形の面積は" << size << std::endl;
     }
 };
 
 
 int main() {
-    Vehicle* vehicle[3];
+    IShape* shape[3];
    
     // 生成
     for (int i = 0; i < 2; i++) {
         if (i < 1) {
-            vehicle[i] = new Car;
+            shape[i] = new Circle;
         } else {
-            vehicle[i] = new Bicycle;
+            shape[i] = new Rectangle;
         }
     }
 
-    // move() を呼び出す
+    //面積の出力
     for (int i = 0; i < 2; i++) {
-        vehicle[i]->move();
+        shape[i]->Size();
+        shape[i]->Draw();
     }
 
     // メモリ解放
     for (int i = 0; i < 2; i++) {
-        delete vehicle[i];
+        delete shape[i];
     }
 
 	return 0;
