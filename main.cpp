@@ -1,26 +1,26 @@
 #include <stdio.h>
-#include <thread>
-
-void one() {
-	printf("thread 1\n");
-}
-void two() {
-	printf("thread 2\n");
-}
-void three() {
-	printf("thread 3\n");
-}
+#include <string>
+#include <chrono>
 
 int main() {
+	std::string a(1000000, 'a');
 
-	std::thread th1(one);
-	th1.join();
+    // コピー処理の計測
+    auto start = std::chrono::high_resolution_clock::now();
+    std::string copy = a;
+    auto end = std::chrono::high_resolution_clock::now();
+    auto copyTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
-	std::thread th2(two);
-	th2.join();
+    // ムーブ処理の計測
+    start = std::chrono::high_resolution_clock::now();
+    std::string moved = std::move(a);
+    end = std::chrono::high_resolution_clock::now();
+    auto moveTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 
-	std::thread th3(three);
-	th3.join();
+    //print out
+    printf("1,000,000文字を移動とコピーで比較しました。\n");
+    printf("コピー ： %lld  μs\n", copyTime);
+    printf("移動 ： %lld  μs\n", moveTime);
 
 	return 0;
 }
